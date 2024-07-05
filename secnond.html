@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!--
+        以下CSS地址请在安装软件了替换成本地的地址
+        CSS地址请使用:
+        http://localhost:9000/bigemap.js/v2.1.0/bigemap.css
+        软件下载地址 http://www.bigemap.com/reader/download/detail201802017.html
+    -->
+    <link href='http://www.bigemap.com:9000/bigemap.js/v2.1.0/bigemap.css' rel='stylesheet' />
+    <!--
+        JS地址请使用：
+        http://localhost:9000/bigemap.js/v2.1.0/bigemap.js
+    -->
+    <script src='http://www.bigemap.com:9000/bigemap.js/v2.1.0/bigemap.js'></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+    <title>Google Map Streets</title>
+</head>
+<body>
+    <div id='map'></div>
+    <script>
+        // 软件配置信息地址，软件安装完成之后使用本地地址，如：http://localhost:9000
+        BM.Config.HTTP_URL = 'http://www.bigemap.com:9000';
+        // 在ID为map的元素中实例化一个地图，并设置地图的ID号，ID号程序自动生成，无需手动配置 ，中心点，默认的级别和显示级别控件
+        var map = BM.map('map', 'bigemap.zhongkexingtu', { center: [0, 0], zoom: 2, zoomControl: true,attributionControl:false });
+        var latlngs = [
+            [30, 102.68],
+            [37, 108.43],
+            [37.04, 118.2]
+        ];
+        //创建多边形，并设置填充颜色为红色 ，具体详细API请参见：http://www.bigemap.com/offlinemaps/api/#polygon
+        var polygon = BM.polygon(latlngs, {color: 'red'}).addTo(map);
+        // 让地图适配当前的线段
+        map.fitBounds(polygon.getBounds());
+        polygon.on('click',function(e){
+            alert('我被点击了!');
+        });
+    </script>
+</body>
+</html> 
